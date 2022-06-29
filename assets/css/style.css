@@ -1,0 +1,13 @@
+h2 {
+    text-align: center;
+    background-image: linear-gradient(to right, blue, navy);
+    color: white;
+    padding-top: 2px;
+    padding-bottom: 8px;
+}
+
+legend {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
