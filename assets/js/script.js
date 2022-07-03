@@ -50,45 +50,44 @@ btnEl.addEventListener("click", function () {
 function searchApi(query) {
 
     var APIKey = "19b0c5ded79046cbf68e706032a99265";
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + APIKey;
 
     fetch(queryURL)
         .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    printResults(data);
-                });
-            } else {
-                alert('Error: ' + response.statusText);
+            if (!response.ok) {
+                throw response.json();
             }
+            return response.json();
         })
-        .catch(function (error) {
-            alert('Unable to connect!');
-        });
+        .then(function (data) {
+            // printResults(data);
+            console.log(data);
+        })
+        // .catch(console.err);
 };
 
 
 
-    function printResults(resultObj) {
-        console.log(resultObj);
+// function printResults(resultObj) {
+//     console.log(resultObj);
 
-        var resultTitle = document.createElement('h3');
-        resultTitle.textContent = resultObj.name + resultObj.icon;
+//     var resultTitle = document.createElement('h3');
+//     resultTitle.textContent = resultObj.name + resultObj.icon;
 
-        var resultTemp = document.createElement('p');
-        resultTemp.textContent = "Temp: " + resultObj.main.temp + " °F";
+//     var resultTemp = document.createElement('p');
+//     resultTemp.textContent = "Temp: " + resultObj.main.temp + " °F";
 
-        var resultWind = document.createElement('p');
-        resultWind.textContent = "Wind: " + resultObj.wind.speed + " MPH";
+//     var resultWind = document.createElement('p');
+//     resultWind.textContent = "Wind: " + resultObj.wind.speed + " MPH";
 
-        var resultHumidity = document.createElement('p');
-        resultHumidity.textContent = "Humidity: " + resultObj.main.humidity + " %";
+//     var resultHumidity = document.createElement('p');
+//     resultHumidity.textContent = "Humidity: " + resultObj.main.humidity + " %";
 
-        var resultUV = document.createElement('p');
-        resultUV.textContent = "UV Index: ";
+//     var resultUV = document.createElement('p');
+//     resultUV.textContent = "UV Index: ";
 
-        resultContentEl.appendChild(resultTitle, resultTemp, resultWind, resultHumidity, resultUV);
-    }
+//     resultContentEl.appendChild(resultTitle, resultTemp, resultWind, resultHumidity, resultUV);
+// }
 
 
 
